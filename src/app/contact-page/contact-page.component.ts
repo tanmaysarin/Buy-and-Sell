@@ -12,7 +12,7 @@ export class ContactPageComponent implements OnInit{
 
   email: string = '';
   message: string = '';
-  listing = {} as Listing;
+  listing = {} as Listing; // initializing it like this because we only wasnt 1 listing and not a list
 
   constructor(
     private route: ActivatedRoute, // Allows listing-details-page to access the url parameter in current path
