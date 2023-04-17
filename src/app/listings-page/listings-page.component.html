@@ -1,5 +1,7 @@
 <div>
+    <!-- Creating a context-box to store all the listings -->
     <div class="content-box" *ngFor="let listing of listings">
+        <!-- Creating a box with correct routing links for each of the items in the list -->
         <a routerLink="/listings/{{ listing.id }}">
             <h3>{{ listing.name }} - ${{ listing.price }}</h3>
         </a>
