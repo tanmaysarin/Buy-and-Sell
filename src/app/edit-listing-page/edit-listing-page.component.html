@@ -1,1 +1,13 @@
-<p>edit-listing-page works!</p>
+<div class="content-box">
+    <h2>Edit Listing</h2>
+    <app-listing-data-form buttonText="Save Changes"
+    [currentName]="listing.name"
+    [currentDescription]="listing.description"
+    [currentPrice]="listing.price.toString()"
+    (onSubmit)="onSubmit()"></app-listing-data-form>
+    <!-- Somethins is wrong in the currentPrice scrtion, and the values are not getting inputted.. would have to check again-->
+    
+    <!-- When the button is clicked, the button is set (inside the listing-data-form.component.ts) to call a function "onSubmit",
+    which is supposed to be present in the component.ts file, of the component from where the button was clicked. In this case,
+    the method/function "onSubmit" would be found in the edit-listing-page.component.ts file -->
+</div>
