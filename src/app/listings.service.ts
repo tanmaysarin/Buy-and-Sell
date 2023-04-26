@@ -25,6 +25,7 @@ export class ListingsService {
     private http: HttpClient,
   ) { }
 
+  // get all Listings
   getListings(): Observable<Listing []> {
     // An observable is how Angular incorporates async logic into it apps
     // An observable is some task that our app is executing, in this case,
@@ -32,6 +33,7 @@ export class ListingsService {
     return this.http.get<Listing []>('/api/listings');
   }
 
+  // get a specific Listing
   getListingById(id: string): Observable<Listing>{
     return this.http.get<Listing>(`/api/listings/${id}`);
   }
@@ -43,5 +45,15 @@ export class ListingsService {
       {},
       httpOptions,
     )
+  }
+
+  // Get Listing for specific User
+  getListingsForUser(): Observable<Listing[]> {
+    return this.http.get<Listing[]>('/api/users/12345/listings');
+  }
+
+  //delete Listing
+  deleteListing(id: string): Observable<any> {
+    return this.http.delete(`/api/listings/${id}`);
   }
 }
