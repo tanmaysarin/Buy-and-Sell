@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Listing } from './types';
@@ -9,6 +9,12 @@ import { Listing } from './types';
  * HTTPClient - Angular model that makes request to the server
  */
 
+// tells server that request body of POST request is a Json object (which is needed for a POST request to work)
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type' : 'application/json',
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +30,18 @@ export class ListingsService {
     // An observable is some task that our app is executing, in this case,
     // loading data from a server, that our components then can subscribe to
     return this.http.get<Listing []>('/api/listings');
+  }
+
+  getListingById(id: string): Observable<Listing>{
+    return this.http.get<Listing>(`/api/listings/${id}`);
+  }
+
+  // updates the views in the listing
+  addViewToListing(id: string): Observable<Listing>{
+    return this.http.post<Listing>(
+      `/api/listings/${id}/add-view`,
+      {},
+      httpOptions,
+    )
   }
 }
