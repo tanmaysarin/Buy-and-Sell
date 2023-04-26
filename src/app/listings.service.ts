@@ -1,0 +1,28 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import { Listing } from './types';
+
+/**
+ * RxJS - Library that makes working with async and eventbased code a lot easier
+ * HTTPClient - Angular model that makes request to the server
+ */
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ListingsService {
+
+  constructor(
+    private http: HttpClient,
+  ) { }
+
+  getListings(): Observable<Listing []> {
+    // An observable is how Angular incorporates async logic into it apps
+    // An observable is some task that our app is executing, in this case,
+    // loading data from a server, that our components then can subscribe to
+    return this.http.get<Listing []>('/api/listings');
+  }
+}

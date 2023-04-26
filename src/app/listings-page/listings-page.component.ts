@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Listing } from '../types';
-import { fakeListings } from '../fake-data'
+
+import { ListingsService } from '../listings.service';
 
 @Component({
   selector: 'app-listings-page',
@@ -12,11 +13,16 @@ export class ListingsPageComponent implements OnInit{
   // creating a variable of type Listing and initialize it to empty list
   listings : Listing[] = [];
 
-  constructor() {};
+  constructor(
+    private listingsService: ListingsService,
+  ) {};
 
   ngOnInit(): void {
-    // set the listings list to the fakeListings list data
-    this.listings = fakeListings;
+    // as getListings returns an observable, the subscribe method gets called whenever getListings is called
+    this.listingsService.getListings()
+      .subscribe(listings => this.listings = listings)
+      // listings: the listings data we got from server
+      // this.listings: the data received from server gets set to the variable present in this file
   }
 
 }
